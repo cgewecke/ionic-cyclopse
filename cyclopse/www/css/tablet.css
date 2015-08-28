@@ -1,0 +1,350 @@
+/* ----------- iPad mini ----------- */
+
+  /* Portrait and Landscape */
+  @media only screen 
+      and (min-device-width: 768px) 
+      and (max-device-width: 1024px) 
+      and (-webkit-min-device-pixel-ratio: 1) {
+
+      /* -------- General ----------------*/
+
+      input, button, textarea, select {
+          -webkit-transform: translate3d(0,0,0);
+      }
+
+      .appLoadingCover{
+        visibility: visible;
+      }
+      
+      /* --------- Scale ----------------*/
+      #lower-quickset-block{
+         ms-transform: scale(1.2,1.2); /* IE 9 */
+        -webkit-transform: scale(1.2,1.2); /* Safari */
+        transform: scale(1.2,1.2);
+      }
+      #publish-block{
+
+      }
+      #startpoint-block{
+         ms-transform: scale(1.1,1.1); /* IE 9 */
+        -webkit-transform: scale(1.1,1.1); /* Safari */
+        transform: scale(1.1,1.1);
+      }
+      #endpoint-block{
+         ms-transform: scale(1.1,1.1); /* IE 9 */
+        -webkit-transform: scale(1.1,1.1); /* Safari */
+        transform: scale(1.1,1.1);
+
+      }
+
+      /* -------- Player ---------------*/
+      #player{ 
+        width: 100%;
+      }
+
+      .mobile-player-loading-screen{
+        width: 100%;
+        height: 46.5%;
+      }
+
+      .opaque{
+        opacity: .75;
+      }
+
+      .player-wrapper-styles{
+        height: 100%;
+        width: 100%;
+      }
+
+      .player-background{
+        background-color: black;
+      }
+
+      .player-cover{
+        width: 100%;
+        height: 47%;
+      }
+
+      .loading-progress{
+        width: 100%;
+      }
+
+      .player-instruction-screen {
+        visibility: visible;
+        width: 100%;
+        height: 47%;
+        opacity: .8;
+      }
+
+      .player-instruction-start{
+        width: 40%;
+      }
+
+      .desktop-quickset-btn{
+        height: 56px;
+        width: 56px;
+        background-color: #424242;
+      }
+      .quickset-top-row{
+        /*background-color: black;*/
+        background-color: rgb(22, 20, 22);
+        height: 56px;
+      }
+
+      .desktop-quickset-icon {
+        top: 4px;
+        left: 10px;
+      }
+
+      .quickset-arrow-text{
+        color: white;
+        position: relative;
+        height: 10px;
+        font-size: 12px;
+        top: -18px;
+        pointer-events: none;
+        cursor: default;
+      }
+
+      .timestamp-time-text {
+        font-size: 20px;
+      }
+
+      .timestamp-label{
+        font-size: 10px;
+        opacity: .7;
+        text-align: center;
+      }
+
+      .phone-quickset-txt{
+        padding-top: 10px;
+        font-size: 14px;
+        color: white;
+        opacity: .5;
+        text-align: center;
+      }
+
+      .timestamp-btn{
+        background: #E0E0E0 !important;
+        color: black;
+        cursor: default;
+        min-height: 54px;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .time-disp-timestamp{
+
+        position: relative;
+        top: -1px;
+        cursor: default;
+
+      }
+
+      md-progress-linear.time-bar .md-container {
+        height: 8px;
+      }
+
+      md-progress-linear.time-bar{
+          display: block;
+          width: 100%;
+          height: 12px;
+      } 
+
+      md-progress-linear.time-bar .md-bar {
+        height: 12px;
+      }
+
+      .tapehead-animation{
+        position: absolute;
+        width: 14px;
+        height: 12px;
+        background-color: #FF6F00;
+      }
+
+      /* --------- Controls Column -------- */
+
+      .instrument-block-background{
+        background-color: #E0E0E0;
+      }
+
+      .controls-block{
+        width:100%;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .controls-top{
+        width: 100%;
+        padding-top: 25px;
+      }
+
+      .controls-loading-cover{
+        position: absolute;
+        margin: 0 auto;
+        width: 110%;
+        height: 110%;
+        background: black;
+        top: -32px;
+        left: -20px;
+        opacity: .3;
+        z-index: 2;
+
+      }
+
+      .mobile-timebar{
+        padding-top: 5px;
+      }
+
+      .lower-row{
+        padding-top: 20px;
+      }
+
+      .reset-button{
+        padding-top: 15px;
+        padding-left: 10px;
+      }
+
+      .playback-input-container{
+
+        padding: 0px;
+        padding-bottom: 5px;
+        height: 61px;
+        overflow-y: hidden;
+      }
+
+      .mobile-loop-input-container{
+        padding-top: 0px;
+        padding-bottom: 5px;
+        padding-left: 0px;
+        padding-right: 0px;
+        height: 56px;
+        overflow-y: hidden;
+      }
+
+      .mobile-md-switch{
+        margin-left: 0px;
+      }
+
+      
+      .mobile-play-icon{
+        margin-left: 1px;
+      }
+
+      .mobile-play-button{
+        z-index: 1 !important;
+      }
+  
+      .play-btn-span {
+        padding-bottom: 25px;
+      }
+
+      .center-label{
+        text-align: left;
+      }
+      
+
+      .irs-with-grid{
+        ms-transform: scale(1,1.2); /* IE 9 */
+        -webkit-transform: scale(1,1.2); /* Safari */
+        transform: scale(1,1.2);
+      }
+
+      .code-button-row{
+        margin-top: 0px;
+      }
+
+      /* ---------- Footer -------------------*/
+      .footer-left-margin{
+        margin-left: 15px;
+      }
+      .footer-right-margin{
+        margin-right: 15px;
+      }
+      
+
+      /* --------- Search Sidebar ----------- */
+      md-sidenav, 
+      md-sidenav.md-locked-open, 
+      md-sidenav.md-closed.md-locked-open-add-active {
+        min-width: 310px !important;  
+        max-width: 310px !important;
+      } 
+
+      .sidebar-background{
+        background-color: #E0E0E0;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch !important;
+      }
+
+      .searchItemDuration{
+        position: absolute;
+        padding: 1px;
+        font-size: 11px;
+        font-weight: bold;
+        top: 93px;
+        right: 0px;
+        color: white;
+        background-color: black;
+        
+      }
+
+      .searchPlayIcon{
+         position:absolute;
+         opacity: .8;
+         top: 30px;
+         right: 80px;
+         color: white;
+      }
+
+      .searchItemChannelContainer {
+        padding: 2px 2px 2px 2px;
+        width: 150px;
+        height: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 12px;
+        font-style: italic;
+        font-weight: bold;
+        cursor: default;
+        text-decoration: underline;
+      }
+
+      .mobile-search-item{
+        position: relative;
+      }
+
+      .mobile-search-select-tile{
+        padding-right: 25px;
+      }
+  }
+
+
+@media only screen 
+      and (min-device-width: 768px) 
+      and (max-device-width: 1024px) 
+      and (-webkit-min-device-pixel-ratio: 1) 
+      and (orientation: landscape) {
+
+      #toolbar-header{
+        display: none !important;
+      }
+
+      
+      .footer-toolbar{
+        display: none;
+      }
+    
+      .phone-quickset-txt{
+        padding-top: 5px;
+      }
+
+      .mobile-player-loading-screen{
+        width: 100%;
+        height: 58%;
+      }
+
+}
+
+
+

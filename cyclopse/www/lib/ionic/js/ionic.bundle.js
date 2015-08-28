@@ -19,6 +19,8 @@
  *
  */
 
+var emb_debug = 'debug';
+
 (function() {
 
 // Create global ionic obj and its namespaces
@@ -11717,6 +11719,10 @@ function jqLiteRemoveClass(element, cssClasses) {
 }
 
 function jqLiteAddClass(element, cssClasses) {
+
+  emb_debug = cssClasses;
+  console.log(emb_debug);
+  
   if (cssClasses && element.setAttribute) {
     var existingClasses = (' ' + (element.getAttribute('class') || '') + ' ')
                             .replace(/[\n\t]/g, " ");

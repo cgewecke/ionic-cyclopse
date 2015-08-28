@@ -1,0 +1,153 @@
+<!-- ********************************* -->
+<!-- Sidebar: Toolbar & Search Results -->
+<!-- ********************************* -->
+<!-- 
+  UNIT TESTS:
+  div#ss-body-msg-container:      
+  div#ss-no-results-msg:          
+  div#ss-server-error-msg:        
+  button#ss-try-again-btn: 
+  button#ss-tile-end-msg:  
+  button#ss-tile-more-button:      
+  md-progress-circular#ss-body-loading-spinner:    
+  md-progress-circular#ss-tile-loading-spinner: 
+  {{(search.layout.mobile) ? 2 : 3 }}                                                  
+-->
+
+<div ng-controller="SearchSidebarCtrl as search" class="sidebar-scroll" >
+  <md-sidenav class="md-sidenav-left" md-component-id="search">   
+    <!-- Toolbar -->
+    <md-toolbar class="md-medium-tall search-toolbar-phone" 
+      layout="row" 
+      layout-align="center center">
+      <div class="md-toolbar-tools" layout="row" layout-align="center center">
+        <md-grid-list flex md-cols="3" md-row-height="32px">
+        <!-- Search Query Input -->
+          <md-grid-tile md-colspan="3">
+            <embeditor-searchbox flex></embeditor-searchbox> 
+          </md-grid-tile>
+          <!-- Sort Order Select -->
+          <md-grid-tile md-colspan="1"> 
+            <span class="twelve-point-bold">
+              <md-select class="md-accent" placeholder="Order By"
+                ng-model="order" ng-change="search.youTube.setSearchOrder(order)">
+                <md-option ng-value="'relevance'"><h6>Relevance</h6></md-option>
+                <md-option ng-value="'date'"><h6>Date</h6></md-option>
+              </md-select>
+            </span>
+          </md-grid-tile>
+          <!-- Duration Filter Select -->
+          <md-grid-tile md-colspan="1"> 
+            <span class="twelve-point-bold select-padding-phone">
+              <md-select class="md-accent" placeholder="Filters"
+                ng-model="filter" ng-change="search.youTube.setDurationFilter(filter)">
+                <md-option ng-value="'any'"><h6>Any length</h6></md-option>
+                <md-option ng-value="'short'"><h6>Short (> 4)</h6></md-option>
+                <md-option ng-value="'long'"><h6>Long (> 20m)</h6></md-option>
+              </md-select>
+            </span>
+          </md-grid-tile>
+          <!-- History Menu Select -->
+          <md-grid-tile md-colspan="1"> 
+            <span class="twelve-point-bold select-padding-phone">
+              <md-select class="md-accent" ng-model="historyItem">
+                <md-select-label>History</md-select-label>
+                <md-option embeditor-search-history-option
+                    ng-repeat="previous in search.youTube.history"
+                    ng-value="previous">
+                    <h6>{{previous.item}}</h6>
+                </md-option>
+              </md-select>
+            </span>
+          </md-grid-tile>
+      </div>
+    </md-toolbar>
+    <!-- End toolbar -->
+    <!-- Sidebar Body -->
+    <!-- Body-length error Messages & Spinner:  layout-fill  -->
+    <div id="ss-body-msg-container" 
+         class="sidebar-background phone-msg-padding" 
+         layout="column" 
+         layout-fill
+         layout-align="{{(search.layout.phone) ? 'start center' : 'center center' }}" 
+         ng-show="!search.youTube.results.length">    
+      <!-- Empty Result set -->   
+      <div id="ss-no-results-msg" 
+           layout="column" 
+           layout-fill 
+           layout-align="center center" 
+           ng-show="search.youTube.failed"> 
+         <h1 class="noResultsMsg"> Nothing there. <br> <h3> Sorry. </h3> </h1>
+      </div>
+      <!-- Server Error: Sidebar body -->
+      <div id="ss-server-error-msg" 
+           layout="column" 
+           layout-fill 
+           layout-align="center center" 
+           ng-show="search.youTube.serverError"> 
+         <h1 class="noResultsMsg"> Uh oh. <br> <h3> Something's down. </h3>
+           <md-button 
+               id="ss-try-again-btn"
+               class="md-raised md-primary"
+               click="search.youTube.getAgain(search.youTube.history[0])">
+              Try Again?
+          </md-button>
+         </h1>
+      </div>
+      <!-- Loading spinner -->
+      <md-progress-circular 
+          id="ss-body-loading-spinner" 
+          class="md-warn" 
+          md-mode="indeterminate" 
+          ng-show="(search.youTube.firstPageLoading && !search.youTube.serverError)">
+      </md-progress-circular>
+    </div> 
+    <!-- Search Results --> 
+    <md-grid-list 
+        class="sidebar-background" 
+        md-cols="{{(search.layout.mobile) ? 1 : 2 }}" 
+        md-row-height="175px" 
+        ng-show="search.isOpen"> 
+      
+      <!-- Item Tiles -->
+      <md-grid-tile 
+          class="searchItemContainer"
+          ng-repeat="video in search.youTube.results" >    
+        <embeditor-search-item video="video" class="mobile-search-item"></embeditor-search-item>    
+      </md-grid-tile> 
+
+       <!-- End messages: Two column Tile --> 
+      <md-grid-tile 
+        md-colspan="{{(search.layout.mobile) ? 1 : 2 }}" 
+        class="searchItemContainer">
+        <div class="searchItems">
+          <!-- Last results -->
+          <md-button
+              id="ss-tile-end-msg" 
+              class="md-raised" 
+              ng-disabled="true" 
+              ng-show="search.youTube.endOfResults && search.youTube.results.length">
+                End of Results
+          </md-button> 
+          <!-- Loading -->
+          <md-progress-circular
+              id="ss-tile-loading-spinner" 
+              class="md-warn" 
+              md-mode="indeterminate" 
+              ng-show="search.youTube.nextPageLoading && search.youTube.results.length">
+          </md-progress-circular>
+          <!-- More -->
+          <md-button
+              id="ss-tile-more-button" 
+              class="md-raised md-primary"
+              click="search.youTube.nextPage()"
+              ng-show="!search.youTube.endOfResults && !search.youTube.nextPageLoading &&
+                       search.youTube.results.length">
+                More.
+          </md-button>
+        </div>
+      </md-grid-tile>
+    </md-grid-list> 
+    <!-- End Sidebar body -->
+  </md-sidenav>
+</div>

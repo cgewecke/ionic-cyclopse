@@ -1,0 +1,218 @@
+<div layout="column" layout-align="center center" layout-fill>
+  
+    <!-- Embed Code Directive -->
+   <embeditor-youtube-embed 
+      ng-controller="PlayerCtrl as player"
+      layout="row"
+      layout-fill
+      layout-align="{{player.layout.alignWithSidenav('search', 'row')}}" 
+      class="player-background player-block">
+      
+      <div id="player-wrapper" class="player-wrapper-styles"> 
+
+        <!-- Timestamp & Setters --> 
+        <div id="quickset-phone-row"
+             layout="column" 
+             flex="100" 
+             ng-show="!player.API.initializing && player.API.mobile" >
+          
+          <div layout="row" class="quickset-top-row" flex layout-align="start start">
+      
+            <!-- Set Start Button -->
+            <span layout="column" layout-align="center center">
+              <div click="player.startFromTimestamp()" class="desktop-quickset-btn">
+                <!-- Phone -->
+                <ng-md-icon id="timestamp-btn-start" icon="get_app" 
+                  ng-attr-style="fill:white" style="fill:white" size="28"
+                  class="desktop-quickset-icon" hide-gt-sm>
+                </ng-md-icon> 
+
+                <!-- Tablet -->
+                <ng-md-icon id="timestamp-btn-start" icon="get_app" 
+                  ng-attr-style="fill:white" style="fill:white" size="36"
+                  class="desktop-quickset-icon" hide-sm>
+                </ng-md-icon> 
+
+              </div>
+              <span class="arrow-text-wrapper">
+                <span class="quickset-arrow-text"> Start </span>
+              </span>
+            </span>
+
+            <!-- Timestamp -->
+            <span layout="column" flex layout-align="center center" > 
+              <div layout="row" layout-fill layout-align="space-between">
+
+                <!-- Play (Phone) / Info (Tablet) --> 
+                <div layout="column" flex="25" layout-align="center">
+
+                  <div layout="row" layout-align="start center">
+                    <div id="play-btn" 
+                        click="player.API.togglePlay()"
+                        class="mobile-play-button"
+                        hide-md>
+                      <ng-md-icon id="play-icon" icon="play_circle_outline" size="28" style="fill:white"
+                          ng-show="player.API.state === player.API.PAUSED" class="mobile-play-icon">
+                      </ng-md-icon>
+                      <ng-md-icon id="pause-icon" icon="pause" size="28" style="fill:white"
+                          ng-show="player.API.state === player.API.PLAYING" class="mobile-play-icon">
+                      </ng-md-icon>
+                    </div> 
+                  </div>
+                </div>
+
+                 <!-- Timestamp -->
+                <div layout="column" flex="50" class="desktop-timestamp-btn" md-no-ink>
+                  <div class="timestamp-time-text" layout="row" layout-align="center" layout-fill > 
+                      {{player.API.timestamp.toString().toHHMMSSss()}} 
+                  </div>
+                  <div class="timestamp-label"> Timestamp </div>
+                </div>
+
+                <!-- Instructions --> 
+                <div layout="column" flex="25">
+                  <div class="phone-quickset-txt">
+                    Tap arrows to quick set start/end 'now'
+                  </div>
+                </div>
+              </div>
+            </span>
+
+            <!-- Set End Button -->
+            <span layout="column" layout-align="center center">
+              <div click="player.endFromTimestamp()" class="desktop-quickset-btn">
+               <!-- Phone -->
+                <ng-md-icon id="timestamp-btn-start" icon="get_app" 
+                  ng-attr-style="fill:white" style="fill:white" size="28"
+                  class="desktop-quickset-icon" hide-gt-sm>
+                </ng-md-icon> 
+
+                <!-- Tablet -->
+                <ng-md-icon id="timestamp-btn-start" icon="get_app" 
+                  ng-attr-style="fill:white" style="fill:white" size="36"
+                  class="desktop-quickset-icon" hide-sm>
+                </ng-md-icon> 
+              </div>
+              <span class="arrow-text-wrapper">
+                <span class="quickset-arrow-text"> End </span>
+              </span>
+            </span>
+          </div>
+        </div>
+        
+        <!-- Loading screen: Mobile -->
+        <div class="mobile-player-loading-screen" 
+             id="player-loading-screen"
+             ng-class="{'visible': player.API.initializing || player.API.mobileStart, 
+                        'opaque': player.API.mobileStart    }"
+             ng-show="player.API.mobile">
+
+            <md-progress-circular 
+              layout="row"
+              layout-fill
+              layout-align="center center"
+              ng-show="player.API.initializing
+                         && !player.API.mobileStart"
+              id="player-loading-spinner" 
+              class="md-warn" 
+              md-mode="indeterminate">
+            </md-progress-circular>
+
+            <!-- Mobile start button & mobile landing page -->
+            <div layout="column" 
+                 layout-fill
+                 layout-align="center center"
+                 ng-show="player.API.mobileStart" 
+                 class="player-instruction-screen" >
+              <div class="player-instruction-title"> 
+                
+                <span> cyclop.se </span>
+      
+              </div>
+              <div> lets you edit any YouTube video </div> 
+              <div> and instantly re-publish it as a looping clip on</div>
+              <div> Twitter or Tumblr </div>
+              <div layout="row" layout-align="space-around" class="player-instruction-start">
+                <span class="player-instruction-icon" hide-gt-md>
+                  <md-button class="md-fab md-mini twitter-button"> 
+                    <span class="fa fa-twitter share-icon"></span> 
+                  </md-button>
+                </span>
+                <md-button class="md-raised md-primary"> Start </md-button>
+                <span class="player-instruction-icon" hide-gt-md>
+                  <md-button class="md-fab md-mini tumblr-button"> 
+                    <span class="fa fa-tumblr share-icon"></span> 
+                  </md-button>
+                </span>
+
+              </div>
+              <div> There's no uploading, downloading or login. </div>
+              <div> Just search, clip and post. </div> 
+            </div>
+        </div>
+
+        <!-- Loading screen: Desktop-->
+        <div class="player-loading-screen" 
+             id="player-loading-screen"
+             ng-class="{'visible': player.API.initializing}"
+             ng-show="!player.API.mobile">
+            <md-progress-circular 
+              layout="row"
+              layout-fill
+              layout-align="center center"
+              id="player-loading-spinner" 
+              class="md-warn" 
+              md-mode="indeterminate">
+            </md-progress-circular>
+        </div>
+
+        <!-- Landing Screen: Desktop -->
+        <div class="player-instruction-screen" 
+             id="player-instruction-screen"
+             ng-class="{'visible': (!player.API.initializing && player.layout.start) }"
+             ng-show="!player.API.mobile">
+            <div layout="column" layout-fill layout-align="center center">
+              <div class="player-instruction-title"> 
+                cyclop.se
+              </div> 
+              <div> lets you edit any YouTube video </div> 
+              <div> and instantly re-publish it as a looping clip on </div>
+              <div> Twitter or Tumblr </div>
+              <div class="player-instruction-start">
+                <md-button class="md-raised md-primary"> Start </md-button>
+              </div>
+              <div> There's no uploading, downloading or login. </div>
+              <div> Just search, clip, and post. </div> 
+            </div>
+
+        </div> 
+
+        
+        
+        <!-- Timestamp & Transparent cover & Touch Shield -->
+        <div class="player-cover">
+          <span layout="row" 
+                layout-fill
+                layout-align="start end">
+
+              <!-- Mobile Timebar/Player Touch Shield --> 
+              <div layout="row" 
+                   layout-fill
+                   class="timebar-touch-shield"
+                   ng-show="player.API.mobile">
+              </div>
+          </span>
+        </div>
+        <!-- Player -->
+        <div layout="row" layout-align="center center" class="player-wrapper-styles">
+          <div id="player"></div>
+        </div>
+        <!-- TimeBar -->
+        <embeditor-player-time-bar class="loading-progress"></embeditor-player-time-bar> 
+      </div>
+   </embeditor-youtube-embed>
+
+
+   <!-- Controls Block -->
+   <embeditor-section-player-controls layout="row" layout-fill></embeditor-section-player-controls>
+</div>

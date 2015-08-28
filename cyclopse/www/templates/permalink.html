@@ -1,0 +1,71 @@
+<!-- Permalink Dialog Template -->
+<md-dialog flex="50" flex-md="75" flex-sm="100" >
+   <!-- Toolbar -->
+   <md-toolbar layout="row" layout-align="start center">
+      <div class="md-toolbar-tools">
+         <!-- Icon -->
+         <md-button aria-label="embeditor-icon" class="md-warn" aria-label="icon"> 
+            <ng-md-icon icon="album" size="48" hide-sm></ng-md-icon>
+            <ng-md-icon icon="album" size="40" hide-gt-sm></ng-md-icon>
+         </md-button>
+         <!-- Instructions -->
+         <div class="embed-instructions" flex="70">
+            <span class="embed-title"> Permalink </span>
+            <br>
+            <span hide-sm> A permanent link to your clip on cylcop.se </span> 
+         </div>
+         <span flex></span>
+         <!-- Close button -->
+         <md-button id="code-dialog-dismiss-btn" click="mdDialog.hide()" aria-label="close">
+            <ng-md-icon icon="clear"></ng-md-icon>
+         </md-button>
+     </div>
+   </md-toolbar>
+
+   <div layout="column" layout-fill>
+      <!-- Content Column -->
+      <div layout="column" layout-fill>
+         <!-- Code Window -->
+         <md-dialog-content class="embed-permalink-content"
+            layout="row" layout-align="center center"> 
+
+            <md-content flex class="permalink-code-text"> 
+               <span ng-show="ready" 
+                     id='embed-code-text' 
+                     ng-class="{'embed-code-highlight': highlight}"
+                     class="permalink-code">
+                     {{permalink}}
+               </span>
+               <md-progress-circular 
+                     md-mode="indeterminate" 
+                     class="md-warn embed-code-spinner" 
+                     ng-show="!ready">
+               </md-progress-circular>
+            </md-content>      
+         </md-dialog-content>
+         <!-- Copy Button --> 
+         <div class="embed-copy-btn-row" 
+              layout="row" 
+              layout-align="center center" 
+              layout-fill
+              ng-show="!API.mobile">
+            <md-button id="code-copy-button" 
+               embeditor-copy-code-button 
+               model="permalink"
+               aria-label="copy"
+               class="code-btn md-whiteframe-z1"> 
+               {{copyButtonMessage}} 
+            </md-button>
+         </div>  
+      </div>
+   </div>
+
+   <!-- Footer -->
+   <md-toolbar layout="row" layout-align="start center" layout-align-sm="center center">
+      <div class="md-toolbar-tools md-warn">
+         <span class="embed-instructions" hide-gt-sm> 
+            A permanent link to your clip on cylcop.se 
+         </span> 
+     </div>
+   </md-toolbar> 
+</md-dialog>

@@ -1,0 +1,60 @@
+
+<!-- Footer -->
+<md-toolbar 
+    ng-controller="FooterCtrl as footer"
+    layout="row" 
+    layout-align="end center" 
+    class="footer-toolbar md-medium-tall">
+
+  <div class="md-toolbar-tools" layout="row" >
+    <span layout="column" layout-align="center center" class="footer-left-margin">
+
+      <!-- Ecce Homo -->
+      <div> 
+        <ng-md-icon 
+          icon="info" 
+          size="48" 
+          style="fill:white"
+          ng-attr-style="fill:white"
+          click="footer.info()">
+        </ng-md-icon>
+      </div>
+      <div class="footer-info-text"> Contact </div>
+    </span>
+
+    <!-- Cyclopses On Tumblr -->
+    <span layout="column" layout-align="center center" class="footer-left-margin">
+      <div> 
+        <md-button 
+          class="md-fab md-mini tumblr-button"
+          click="footer.tumblr()">
+             <span class="fa fa-tumblr fa-lg share-icon footer-icon"></span>  
+          </md-button>
+      </div>
+      <div class="footer-info-text footer-tumblr-text"> 
+        <span> Apocyclopse </span>
+      </div>
+    </span>
+
+    <!-- Penelope On Twitter --> 
+    <span layout="column" layout-align="center center" class="footer-left-margin">
+      <div> 
+        <a href="https://twitter.com/apocyclopse" target="_blank">
+          <md-button class="md-fab md-mini twitter-button">
+            <span class="fa fa-twitter fa-lg share-icon footer-icon"></span>  
+          </md-button>
+        </a>
+      </div>
+      <div class="footer-info-text footer-tumblr-text"> 
+        <span> Penelope </span>
+      </div>
+    </span>
+    
+    <!-- Flex Spacer -->
+    <span flex></span>
+
+    <!-- Tubegineers -->
+    <span class="footer-powered" hide-sm> powered by </span>
+    <span class="fa fa-youtube footer-youtube-icon footer-right-margin"></span>
+  </div>
+</md-toolbar>
