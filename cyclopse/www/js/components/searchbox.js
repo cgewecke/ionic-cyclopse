@@ -40,7 +40,7 @@ var sr_debug, sr_debugII;
       self.synch = false;
       self.youTube = youTubeDataAPI;
       self.timeout = $timeout;
-      self.phone = ( navigator.userAgent.match(/(iPod|iPhone)/g) ? true : false );
+      self.phone = true;
       
       // Autocomplete on/of toggles necessary to stop md-autocomplete from
       // re-running search when a selection is made and the searchText updates/changes
@@ -138,7 +138,7 @@ var sr_debug, sr_debugII;
       
       // Captures carriage return in input box and hacks into mdAutoComplete to execute
       // selection, close dropdown w/escape event. Does nothing if searchText is empty string 
-      mdElem.bind('keypress', function(event){
+      mdElem.bind('keydown', function(event){
       
          if (event.which === 13 && mdScope.searchText && mdScope.searchText.length ){
             mdCtrl.keydown({keyCode: 27}); // Escape closes dropdown.
@@ -149,44 +149,15 @@ var sr_debug, sr_debugII;
 
       // Captures blur event (triggered by 'Done') on iPhone. Requires that submit be called
       // explicitly - the watcher is not reacting to the value change per above.
-
-      // Hack to skip some weird Android blur bug.
-      mdInput.bind('focus', function(event){
-         console.log('focussing');
-         preventDefault = true;
-
-         //cordova.plugins.Keyboard.show();
-
-      })
-
-      mdInput.bind('touchcancel', function(event){
-         console.log('hearing touchcancel');
-         sr_debug = event;
-      })
-
-      mdInput.bind('touchstart', function(event){
-         console.log('hearing touchstart');
-         sr_debug = event;
-      })
-
-      mdInput.bind('touchend', function(event){
-         console.log('hearing touchend');
-         sr_debug = event;
-      })
-
       mdInput.bind('blur', function(event){
          
-         console.log('fuck you');
-         event.preventDefault();
-         mdScope.$apply();
-
-         
+         /*
          if ( scope.ctrl.phone && mdScope.searchText && mdScope.searchText.length ){
             console.log('running escape code');
             mdCtrl.keydown({keyCode: 27}); // Escape closes dropdown.
             scope.ctrl.submit(mdScope.searchText);
             scope.$apply();
-         }
+         }*/
       })
    }
    

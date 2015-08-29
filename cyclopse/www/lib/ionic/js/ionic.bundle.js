@@ -11707,7 +11707,7 @@ function jqLiteHasClass(element, selector) {
 }
 
 function jqLiteRemoveClass(element, cssClasses) {
-  if (cssClasses && element.setAttribute) {
+  if (cssClasses && typeof cssClasses === 'string' && element.setAttribute) {
     forEach(cssClasses.split(' '), function(cssClass) {
       element.setAttribute('class', trim(
           (" " + (element.getAttribute('class') || '') + " ")
@@ -11723,7 +11723,7 @@ function jqLiteAddClass(element, cssClasses) {
   emb_debug = cssClasses;
   console.log(emb_debug);
   
-  if (cssClasses && element.setAttribute) {
+  if (cssClasses && typeof cssClasses === 'string' && element.setAttribute) {
     var existingClasses = (' ' + (element.getAttribute('class') || '') + ' ')
                             .replace(/[\n\t]/g, " ");
 

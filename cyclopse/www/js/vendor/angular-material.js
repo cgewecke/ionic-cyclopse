@@ -10363,24 +10363,26 @@ angular.module('material.components.whiteframe', []);
     return {
       template:     '\
         <md-autocomplete-wrap role="listbox">\
-          <input type="text"\
-              ng-disabled="isDisabled"\
-              ng-model="searchText"\
-              ng-blur="$mdAutocompleteCtrl.blur()"\
-              ng-keydown="$mdAutocompleteCtrl.keydown($event)"\
-              placeholder="{{placeholder}}"\
-              aria-label="{{placeholder}}"\
-              aria-autocomplete="list"\
-              aria-haspopup="true"\
-              aria-activedescendant=""\
-              aria-expanded="{{!$mdAutocompleteCtrl.hidden}}"/>\
-          <button\
-              type="button"\
-              ng-if="searchText">\
-              ng-click="$mdAutocompleteCtrl.clear()">\
-            <md-icon md-svg-icon="cancel"></md-icon>\
-            <span class="visually-hidden">Clear</span>\
-          </button>\
+          <label>\
+            <input type="text"\
+                ng-disabled="isDisabled"\
+                ng-model="searchText"\
+                ng-blur="$mdAutocompleteCtrl.blur()"\
+                ng-keydown="$mdAutocompleteCtrl.keydown($event)"\
+                placeholder="{{placeholder}}"\
+                aria-label="{{placeholder}}"\
+                aria-autocomplete="list"\
+                aria-haspopup="true"\
+                aria-activedescendant=""\
+                aria-expanded="{{!$mdAutocompleteCtrl.hidden}}"/>\
+            <button\
+                type="button"\
+                ng-if="searchText"\
+                ng-click="$mdAutocompleteCtrl.clear()">\
+              <md-icon md-svg-icon="cancel"></md-icon>\
+              <span class="visually-hidden">Clear</span>\
+            </button>\
+          </label>\
           <md-progress-linear\
               ng-if="$mdAutocompleteCtrl.loading"\
               md-mode="indeterminate"></md-progress-linear>\

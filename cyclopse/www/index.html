@@ -10,7 +10,7 @@
                       img-src *">   
                       
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> 
     <title></title>
 
     <!-- Ionic CSS -->
@@ -39,21 +39,22 @@
     <script src="js/vendor/angular-aria.js"></script>
     <script src="js/vendor/angular-resource.js"></script>
     <script src="js/vendor/angular-route.js"></script>
-    <script src="js/vendor/angular-material.js"></script>
+    <script src="js/vendor/angular-material.js"></script> 
     <script src="js/vendor/angular-material-icons.js"></script>
     <script src="js/vendor/angular-messages.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
+ 
     <!-- Cyclopse JS -->
     <script src="js/vendor/moment.min.js"></script>
     <script src="js/vendor/momentz-duration.js"></script>
     <script src="js/vendor/ion.rangeSlider.min.js"></script>
     <script src="js/vendor/ZeroClipboard.min.js"></script>
+    
     <script src="js/app.js"></script>
     <script src="js/appCtrl.js"></script>
-
+    
     <script src="js/services/codegenerator.js"></script>
     <script src="js/services/cyclopsedataAPI.js"></script>
     <script src="js/services/layoutmanager.js"></script>
@@ -67,7 +68,7 @@
     <script src="js/components/rangefinder.js"></script>
     <script src="js/components/searchbox.js"></script>
     <script src="js/components/searchsidebar.js"></script>
-    <script src="js/components/toolbar.js"></script>
+    <script src="js/components/toolbar.js"></script> 
   </head>
   <body ng-app="embeditor">
       <!-- The nav bar that will be updated as we navigate between views. -->
@@ -80,14 +81,12 @@
       have templates inline in this html file if you'd like).
     -->
     <ion-nav-view> 
-        <!-- <ion-content> -->
-            <ion-content class="content-block" app-click layout="column" layout-fill> 
-                <div ng-include src="'templates/toolbar.html'" layout="column"></div> 
-                <embeditor-section-sidebar></embeditor-section-sidebar>
-                <embeditor-section-app></embeditor-section-app>
-                <div ng-include src="'templates/footer.html'"></div>
-            </ion-content>
-        <!-- </ion-content> -->
+        <ion-content class="content-block" layout="column" layout-fill> 
+            <div ng-include src="'templates/toolbar.html'" layout="column"></div> 
+            <embeditor-section-sidebar></embeditor-section-sidebar>
+            <embeditor-section-app></embeditor-section-app>
+            <div ng-include src="'templates/footer.html'"></div> 
+        </ion-content> 
     </ion-nav-view>
   </body>
 </html>
