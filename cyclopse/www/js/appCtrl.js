@@ -27,9 +27,8 @@ angular.module('embeditor')
 
         scope.$on('YTPlayerAPI:playerLoaded', function(){
 
-          (!app.layout.android) ? 
-            elem.css('display', 'none'):
-            false;
+          elem.css('display', 'none');
+
         });
       }
     };
@@ -43,13 +42,13 @@ angular.module('embeditor')
          link: function(scope, element, attrs){
             
 
-            element.bind('touchstart click', function(event) { 
+            element.bind('touchstart click', function(event) {
 
               console.log('clicked');
                         
               event.preventDefault();
               event.stopPropagation();
-  
+                
               scope.$event = event;
               scope.$apply(attrs['click']);
 
@@ -67,18 +66,9 @@ angular.module('embeditor')
          link: function(scope, element, attrs){
             
             element.bind('touchstart click', function(event) {
-               //layoutManager.start = false;
-               //scope.$apply();
+               layoutManager.start = false;
+               scope.$apply();
             });
-
-            element.bind('touchcancel', function(event){
-              console.log('touchcancel heard at outermost');
-            })
-
-            element.bind('blur', function(event){
-              console.log('blur heard outermost');
-              app_debug = event.target;
-            })
          }
       };
    };

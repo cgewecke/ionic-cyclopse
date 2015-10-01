@@ -65,37 +65,11 @@ var ed_debug, ed_debugII;
          // Close();
          self.close = function() { $mdDialog.hide(); };
 
-         // Preview(): Generates a clip in the DB 
-         // On desktop & tablet -> before DB resolves, a blank tab gets opened synchonously, at DB resolution,
-         //    the resolved address gets opened in that tab name. 
-         // On Iphone/Ipod -> open dialog with active preview link - transfers user to mobile safari.
+         // Preview launches the clip in an iframe in a dialog window
          self.preview = function(event){
 
-            // Phone
-            if (layout.phone){
-               self.open(event, 'preview');
-            
-            // Desktop & Tablet
-            } else {
-            
-               self.target = event.currentTarget.id;
-               self.opening = true;
-               self.counter += 1;
-               
-               code.create().then(
-                  function(success){ 
-                     
-                     self.opening = false;  
-                   
-                     $window.open( $window.location.href + 'videos/' + code.options._id, 
-                        'preview' + self.counter);
-                     
-                  },
-                  function(error){ $rootScope.$broadcast('embedCodeDialog:database-error');}
-               );
-               
-               $window.open('', 'preview' + self.counter);
-            }
+            self.open(event, 'preview');
+      
          };
 
          // Tweet(): Generates a clip in the DB 
@@ -128,7 +102,12 @@ var ed_debug, ed_debugII;
                      
                   }
                },
-               function(error){ $rootScope.$broadcast('embedCodeDialog:database-error');}
+
+               function(error){ 
+                     self.opening = false;  
+                     $rootScope.$broadcast('embedCodeDialog:database-error');
+               }
+               
             );
             
             // Open new tab in Desktop/Tablet
@@ -152,9 +131,8 @@ var ed_debug, ed_debugII;
 
       // -------------------- CONTROLLER: dialogCtrl(): ---------------------------------
       // Injected into the dialog window and the copy button directive
-      function dialogCtrl($scope, $mdDialog, $window, $sce, codeGenerator, youtubePlayerAPI){
+      function dialogCtrl($scope, $mdDialog, $window, $timeout, codeGenerator, youtubePlayerAPI, layoutManager){
 
-         console.log('new dialog ctrl');
          var defaultButtonMessage = "Click to copy";  
          
          var formats = {
@@ -167,17 +145,19 @@ var ed_debug, ed_debugII;
          $scope.frameHeight = codeGenerator.framesizes.vals[$scope.framesize].height;;
          $scope.frameWidth = codeGenerator.framesizes.vals[$scope.framesize].width;
          $scope.ready = false; // When false, spinner occupies code window
+         $scope.delayed_ready = false; // When false, spinner occupies preview window (phones)
          $scope.creationError = false; // When true . . . .
          $scope.highlight= true; // When true, code is faux-highlighted, false after copy btn is clicked.
          $scope.copyButtonMessage = defaultButtonMessage; // 'Click to Copy' || 'Copied'
          $scope.code = ''; // Contents of code window
          $scope.permalink = ''; // Permalink 
+         $scope.embedlink = ''; // Embed link
       
          // Scoped services
          $scope.mdDialog = $mdDialog; 
-         $scope.sce = $sce;
          $scope.codeGenerator = codeGenerator;
          $scope.API = youtubePlayerAPI;
+         $scope.layout = layoutManager;
 
          
 
@@ -216,7 +196,7 @@ var ed_debug, ed_debugII;
          $scope.facebookShare = function(){
 
             $window.open(
-            '//www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(permalink())
+            '//www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(embedlink())
             , 'sharer'
             );
             $scope.mdDialog.hide();
@@ -224,7 +204,7 @@ var ed_debug, ed_debugII;
 
          $scope.twitterShare = function(){
             $window.open(
-               '//www.twitter.com/intent/tweet?' + 'url=' + encodeURIComponent(permalink())
+               '//www.twitter.com/intent/tweet?' + 'url=' + encodeURIComponent(embedlink())
                , 'sharer'
             );
 
@@ -232,7 +212,7 @@ var ed_debug, ed_debugII;
          };
 
          $scope.twitterSharePhone = function(){
-            return '//www.twitter.com/intent/tweet?' + 'url=' + encodeURIComponent(permalink());
+            return '//www.twitter.com/intent/tweet?' + 'url=' + encodeURIComponent(embedlink());
          };
 
          $scope.tumblrShare = function(){
@@ -258,7 +238,11 @@ var ed_debug, ed_debugII;
          $scope.$on('embedCodeDialog:ready', function(){
             $scope.code = formats["responsive"]();
             $scope.permalink = permalink();
+            $scope.embedlink = embedlink();
             $scope.ready = true;
+
+            // Render delay for IPhone preview iframe
+            $timeout(function(){ $scope.delayed_ready = true;}, 1000 );
          });
 
          $scope.$on('embedCodeDialog:database-error', function(){
@@ -280,7 +264,7 @@ var ed_debug, ed_debugII;
             return window.location.href + 'embed/' + codeGenerator.options._id;
          };
       };
-      dialogCtrl.$inject = ['$scope', '$mdDialog', '$window', '$sce', 'codeGenerator', 'youtubePlayerAPI'];
+      dialogCtrl.$inject = ['$scope', '$mdDialog', '$window', '$timeout', 'codeGenerator', 'youtubePlayerAPI', 'layoutManager'];
 
       // ------------------- DIRECTIVES ------------------------------
       // embeditor-copy-code-button: Attribute of md-button#code-copy-button
