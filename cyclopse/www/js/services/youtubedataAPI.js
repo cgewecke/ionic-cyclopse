@@ -33,13 +33,12 @@ var yt_debug;
       this.searchTerm = null; // String: The current search query.
       this.sortOrder ='relevance';  // Name of ordering parameter: date, relevance.
       this.durationFilter='any'; // Name of duration filter param: any, short, long.
-      this.maxResults = 40; // Passed to youtube to constrain size of return
       this.endOfResults = false; // Dom flag - end of results msg
       this.failed = false; // Dom flag - failure msg
       this.serverError = false; // Dom flag - server error msg
       this.firstPageLoading = false; // Dom flag - initial load msg
       this.nextPageLoading = false; // Dom flag - loading paginated rslts msg
-      this.default_max_results = '30';
+      this.default_max_results = '10'; // Passed to youtube to constrain size of return
       
       // ------------------------- Published Events ----------------------------- 
       var queryEvent = {name: 'youTubeDataAPI:query', query: '' }; 

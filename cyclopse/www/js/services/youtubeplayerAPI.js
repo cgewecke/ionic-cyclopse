@@ -63,11 +63,16 @@ var ytp_debug, ytp_debugII;
 
       // Eric Rohmer - La Collectioneuse Trailer 
       self.initialVideo = {
+
+        imageUrl: "https://i.ytimg.com/vi/BisR96mbtZo/mqdefault.jpg",
+        seconds: 50,
+        title: "Callum Paul Pro",
+        videoId: "BisR96mbtZo"
       
-        imageUrl: "https://i.ytimg.com/vi/9qI41zVCB7E/mqdefault.jpg",
+        /*imageUrl: "https://i.ytimg.com/vi/9qI41zVCB7E/mqdefault.jpg",
         seconds: 125,
         title: "Eric Rohmer - La collectionneuse (1965) Trailer",
-        videoId: "9qI41zVCB7E"
+        videoId: "9qI41zVCB7E"*/
       }
 
     } else {

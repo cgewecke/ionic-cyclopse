@@ -96,12 +96,8 @@ var sb_debug, sb_debugII, sb_debugIII;
         scope.play = function(video){
           
           // Auto close sidenav on iphone, ipod & android
-          // Event Broadcast is listened for by search box for phone (bug hack);
-          (scope.playerAPI.phone) ?
-            $mdSidenav('search').toggle() :
-            false;
-        
-          
+          // Event Broadcast is listened for by search box for phone (bug hack); 
+          $mdSidenav('search').toggle();
           scope.playerAPI.load(video);
 
         }

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="lib/ionic/css/ionic.css">
 
     <!-- Vendor CSS -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">   
     <link rel="stylesheet" href="css/angular-material.css" /> 
     <link rel="stylesheet" href="css/ion.rangeSlider.css">
     <link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css">
@@ -79,14 +79,17 @@
       The views will be rendered in the <ion-nav-view> directive below
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
+
+
     -->
     <ion-nav-view> 
-        <ion-content class="content-block" layout="column" layout-fill> 
+        <md-content class="content-block" layout="column" layout-fill> 
+
             <div ng-include src="'templates/toolbar.html'" layout="column"></div> 
             <embeditor-section-sidebar></embeditor-section-sidebar>
             <embeditor-section-app></embeditor-section-app>
             <div ng-include src="'templates/footer.html'"></div> 
-        </ion-content> 
-    </ion-nav-view>
+        </md-content> 
+    </ion-nav-view> -->
   </body>
 </html>

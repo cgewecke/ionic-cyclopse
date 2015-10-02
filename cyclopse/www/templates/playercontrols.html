@@ -13,13 +13,9 @@
   <div layout="row" layout-fill layout-align="start" 
        ng-class="{'timebar-instructions-row': !player.API.mobile}" class="controls-background mobile-timebar">
    
-    <span class="timebar-instructions" ng-show="player.API.mobile"> 
+    <span class="timebar-instructions"> 
       (Tap timebar to seek within clip)
     </span>
-    <span class="set-btn-block-help" ng-show="!player.API.mobile"> 
-      (Click timebar to seek within clip. Set stops using the quick set buttons)
-    </span>
-  
   </div>
 
   <!-- APP Row -->
@@ -36,31 +32,8 @@
       <!-- Slider Row -->
       <div layout="row">
 
-        <!-- Mobile Play Button -->
-        <span layout="column" 
-              layout-align="center"
-              flex="10"
-              flex-md="15"
-              hide-sm>
-          <div layout="row" class="play-btn-span">
-            <md-button id="play-btn" 
-                click="player.API.togglePlay()"
-                class="md-fab md-primary mobile-play-button"
-                md-no-ink>
-              <ng-md-icon id="play-icon" icon="play_arrow" size="42" 
-                  style="fill:white" ng-attr-style="fill:white"
-                  ng-show="player.API.state === player.API.PAUSED" class="mobile-play-icon">
-              </ng-md-icon>
-              <ng-md-icon id="pause-icon" icon="pause" size="42" 
-                  style="fill:white" ng-attr-style="fill:white"
-                  ng-show="player.API.state === player.API.PLAYING" class="mobile-play-icon">
-              </ng-md-icon>
-            </md-button> 
-          </div>
-        </span>
-
         <!-- Slider --> 
-        <span layout="column" flex flex-sm="90" class="phone-slider-col">
+        <span layout="column" flex="90" class="phone-slider-col">
           <span layout="row" layout-align="center" class="rangefinder-span">
             <embeditor-rangefinder layout-fill></embeditor-rangefinder>
           </span>
@@ -75,7 +48,7 @@
         </span>
 
         <!-- Reset Button - phone layout only -->
-        <span layout="column" layout-align="start center" hide-gt-sm flex-sm="10">
+        <span layout="column" layout-align="start center" flex="10">
           <ng-md-icon 
               id="reset-button"
               class="phone-slider-reset-btn"
@@ -116,8 +89,7 @@
                 <md-button id="start-back-1sec-btn" 
                     click="player.API.start(-1)"
                     class="md-raised precision-btn-outer"
-                    aria-label="seek"
-                    md-no-ink >
+                    aria-label="seek">
                  
                   <ng-md-icon icon="chevron_left" size="38" style="fill:black"></ng-md-icon>
                 
@@ -130,8 +102,7 @@
                 <md-button id="start-back-frame-btn" 
                     click="player.API.start(-(player.API.frameLength))"
                     class="md-raised precision-btn-inner"
-                    aria-label="seek"
-                    md-no-ink >
+                    aria-label="seek">
                     
                   <ng-md-icon icon="chevron_left" size="24"></ng-md-icon>
                 </md-button> 
@@ -167,8 +138,7 @@
               <span layout="column" layout-align="center center"> 
                 <md-button id="start-fwd-frame-btn" aria-label="seek"
                     click="player.API.start(player.API.frameLength)"
-                    class="md-raised precision-btn-inner"
-                    md-no-ink>
+                    class="md-raised precision-btn-inner">
                   <ng-md-icon icon="chevron_right" size="24"></ng-md-icon>
                 </md-button>
                 <span class="control-btn-txt-ctr"> frame </span>
@@ -177,8 +147,7 @@
               <span layout="column" layout-align="center center"> 
                 <md-button id="start-fwd-1sec-btn" aria-label="seek"
                     click="player.API.start(1)"
-                    class="md-raised precision-btn-outer"
-                    md-no-ink>
+                    class="md-raised precision-btn-outer">
                   <ng-md-icon icon="chevron_right" size="38"></ng-md-icon>
                 </md-button>
                 <span class="control-btn-txt-right"> 1s </span>
@@ -192,74 +161,6 @@
             </span>
           </span> 
 
-          <!-- Desktop Quick Setter & Timestamp --> 
-          <div id="middle-quickset-block" class="desktop-quickset-block" ng-show="!player.API.mobile" hide-sm>
-                
-            <div layout="row" class="quickset-top-row" flex layout-align="start end">
-        
-              <!-- Set Start Button -->
-              <span layout="column" layout-align="center center">
-                <div click="player.startFromTimestamp()" 
-                     class="desktop-quickset-btn"
-                     ng-init="hover_q1=false"
-                     ng-mouseenter="hover_q1=true"
-                     ng-mouseleave="hover_q1=false"
-                     ng-class="{'quickset-on-hover': hover_q1} ">
-                  <ng-md-icon 
-                    id="timestamp-btn-start"
-                    icon="get_app" 
-                    ng-attr-style="fill:white" 
-                    style="fill:white"
-                    size="28"
-                    class="desktop-quickset-icon">
-                  </ng-md-icon> 
-                </div>
-                <span class="arrow-text-wrapper">
-                  <span class="quickset-arrow-text"> Start </span>
-                </span>
-              </span>
-
-                <!-- Timestamp -->
-              <span layout="column" flex layout-align="center center" > 
-                <div aria-label="seek" class="desktop-timestamp-btn" md-no-ink>
-                  <div class="timestamp-time-text" layout="row" layout-fill > 
-                      {{player.API.timestamp.toString().toHHMMSSss()}} 
-                  </div>
-                </div>
-                <div class="control-btn-txt-ctr startpoint-txt"></div>
-              </span>
-
-              <!-- Set End Button -->
-              <span layout="column" layout-align="center center">
-                <div click="player.endFromTimestamp()" 
-                     class="desktop-quickset-btn"
-                     ng-init="hover_q2=false"
-                     ng-mouseenter="hover_q2=true"
-                     ng-mouseleave="hover_q2=false"
-                     ng-class="{'quickset-on-hover': hover_q2} ">
-                  <ng-md-icon 
-                    id="timestamp-btn-end"
-                    icon="get_app" 
-                    ng-attr-style="fill:white" 
-                    style="fill:white" 
-                    size="28"    
-                    class="desktop-quickset-icon">
-                  </ng-md-icon> 
-                </div>
-                <span class="arrow-text-wrapper">
-                  <span class="quickset-arrow-text"> End </span>
-                </span>
-              </span>
-            </div>
-            <!-- Quick Set Label -->
-            <div class="quickset-btn-block-row"
-                 layout="row" 
-                 layout-fill 
-                 layout-align="center center">
-              <span class="quickset-btn-block-label"> Quick set start/end 'now' </span>
-            </div>  
-        </div>
-
           <!-- ENDPOINTS -->
           <span id="endpoint-block" layout="column" class="endpoint-column" > <!-- flex-sm="90" -->
             <span layout="row">          
@@ -267,8 +168,7 @@
               <span layout="column" layout-align="center center"> 
                 <md-button id="end-back-1sec-btn" aria-label="seek"
                     click="player.API.end(-1)"
-                    class="md-raised precision-btn-outer"
-                    md-no-ink>
+                    class="md-raised precision-btn-outer">
                   <ng-md-icon icon="chevron_left" size="38"></ng-md-icon>
                 </md-button> 
                 <span class="control-btn-txt-left"> 1s </span>  
@@ -277,8 +177,7 @@
               <span layout="column" layout-align="center center"> 
                 <md-button id="end-back-frame-btn" aria-label="seek"
                     click="player.API.end(-(player.API.frameLength))"
-                    class="md-raised precision-btn-inner"
-                    md-no-ink>
+                    class="md-raised precision-btn-inner">
                   <ng-md-icon icon="chevron_left" size="24"></ng-md-icon>
                 </md-button>
                 <span class="control-btn-txt-ctr"> frame </span>
@@ -312,8 +211,7 @@
               <span layout="column" layout-align="center center"> 
                 <md-button id="end-fwd-frame-btn" aria-label="seek"
                     click="player.API.end(player.API.frameLength)"
-                    class="md-raised precision-btn-inner"
-                    md-no-ink>
+                    class="md-raised precision-btn-inner">
                   <ng-md-icon icon="chevron_right" size="24"></ng-md-icon>
                 </md-button>
                 <span class="control-btn-txt-ctr"> frame </span>
@@ -322,8 +220,7 @@
               <span layout="column" layout-align="center center"> 
                 <md-button id="end-fwd-1sec-btn" aria-label="seek"
                     click="player.API.end(1)"
-                    class="md-raised precision-btn-outer"
-                    md-no-ink>
+                    class="md-raised precision-btn-outer">
                   <ng-md-icon icon="chevron_right" size="38"></ng-md-icon>
                 </md-button>
                 <span class="control-btn-txt-right"> 1s </span>
@@ -344,100 +241,9 @@
     <!-- Playback Slider/Loop/Embed Button Row  ... flex -->
       <div layout="row" layout-fill layout-align="space-between center" layout-align-md="space-between start"
         class="controls-background lower-row"> 
-        <!-- Playback Slider -->
-        <span layout="column" flex="30" layout-align="center start" ng-show="!player.API.mobile">
-          <div layout="row" layout-fill layout-align="start end">
-            <md-input-container class="rate-slider-container" >
-              <md-slider flex 
-                id="playback-speed-slider"
-                md-discrete 
-                class="rate-slider"
-                ng-disabled="!player.API.speeds"
-                ng-model="player.API.currentRate" 
-                step=".50" min=".50" max="1.5" 
-                aria-label="playback">
-              </md-slider>
-            </md-input-container>
-          </div>  
-          <div class="rate-slider-label-row"
-               layout="row" 
-               layout-fill 
-               layout-align="space-between center" >
-            <span class="set-btn-block-label"> Playback Rate </span>
-            <span class="set-btn-block-help"> (Set clip speed) </span>
-          </div>
-              
-        </span>
-
-        <!-- Desktop: Option switches -->
-        <span layout="column" flex="20" layout-align="center start" ng-show="!player.API.mobile">
-
-          <div layout="row" layout-fill layout-align="start end">
-            <!-- Loop Switch -->
-            <span layout="column" flex="50" layout-align="end center">
-              <div layout="row" layout-fill layout-align="center end">
-                 <md-input-container class="rate-slider-container">
-                  <md-switch flex 
-                    id="loop-switch"
-                    ng-model="player.API.loop" 
-                    class="playback-slider"
-                    aria-label="loop">
-                  </md-switch>  
-                </md-input-container>
-              </div>
-              <div class="rate-slider-label-row"
-                   layout="row" 
-                   layout-fill
-                   layout-align="center" >
-                <span class="set-btn-block-label"> Loop </span>
-              </div> 
-            </span>
-
-            <!-- Mute Switch -->
-            <span layout="column" flex="50" layout-align="end center">
-              <div layout="row" layout-fill layout-align="center end">
-                 <md-input-container class="rate-slider-container">
-                  <md-switch flex 
-                    id="mute-switch"
-                    ng-model="player.API.mute" 
-                    class="playback-slider"
-                    aria-label="mute">
-                  </md-switch>  
-                </md-input-container>
-              </div>
-              <div class="rate-slider-label-row"
-                   layout="row" 
-                   layout-fill
-                   layout-align="center" >
-                <span class="set-btn-block-label"> Mute </span>
-              </div> 
-            </span>
-          </div>
-        </span>
-
-        <!-- Mobile Quick Setters & Timestamp --> 
-        <span layout="row" flex="50" hide-sm layout-align="center" ng-show="player.API.mobile">
-
-          <!-- Mobile Loop Toggle --> 
-          <span layout="column" flex="40" layout-align="center start" >
-            <md-input-container class="mobile-loop-input-container">
-              <md-switch flex 
-                id="loop-switch"
-                ng-model="player.API.loop" 
-                class="mobile-md-switch"
-                aria-label="loop">
-              </md-switch>  
-            </md-input-container>  
-            <div class="set-btn-block-label">
-              <div layout="row" layout-fill layout-align="space-between center">
-                <span class="set-btn-block-label"> Loop </span>
-              </div>
-            </div> 
-          </span>
-        </span>
         
         <!-- Publish Button Row -->
-        <span layout="column" flex="40" flex-md="45" flex-sm="100">
+        <span layout="column" flex="100">
           <div layout="row" id="publish-block" class="code-button-row" layout-align="space-between center">
 
           <!-- Cyclopse Preview Button -->
@@ -595,44 +401,8 @@
         </span>
       </div>  
     </span>
-    <!-- Slider Reset Button -->
-    <span layout="column" flex="5" class="reset-column" hide-sm>
-      <span layout="row" layout-align="center center" class="reset-button" >
-          <ng-md-icon 
-            id="reset-button"
-            icon="cancel" 
-            size="32" 
-            ng-attr-style="{{hover}}" 
-            ng-init="hover='fill:#FFD54F'"
-            ng-mouseenter="hover='fill:#FF8F00'"
-            ng-mouseleave="hover='fill:#FFD54F'"
-            click="player.API.reset()">
-          </ng-md-icon>
-          <md-tooltip md-delay="2000"> Reset Slider </md-tooltip>
-      </span>
-    </span>
   </div>
 </div>
 
-<!-- Autoplay 
-  <span layout="column" flex="33" layout-align="end center" >
-    <div layout="row" layout-fill layout-align="center end">
-       <md-input-container class="rate-slider-container">
-        <md-switch flex 
-          id="auto-switch"
-          ng-model="player.API.autoplay" 
-          class="playback-slider"
-          aria-label="autoplay">
-        </md-switch>  
-      </md-input-container>
-    </div>
-    <div class="rate-slider-label-row"
-         layout="row" 
-         layout-fill
-         layout-align="center" >
-      <span class="set-btn-block-label"> Autoplay </span>
-    </div> 
-  </span>
-  -->
       
 

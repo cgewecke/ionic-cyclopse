@@ -122,7 +122,7 @@ var sr_debug, sr_debugII;
             mdScope.selectedItem = {value: ''};
             mdInput.blur();
 
-         // Desktop
+         // Android
          } else {
             scope.ctrl.synch = true;
             mdScope.searchText = msg;
@@ -145,34 +145,14 @@ var sr_debug, sr_debugII;
       
          if (event.which === 13 && mdScope.searchText && mdScope.searchText.length ){
 
-            // Android: Submit must be explicitly called
-            if ( scope.ctrl.android ){
+         
                mdCtrl.keydown({keyCode: 27}); // Escape closes dropdown.
                scope.ctrl.submit(mdScope.searchText);
                mdInput.blur();
                scope.$apply();
 
-            // Desktop, Tablet - watcher . . .
-            } else {
-
-               mdCtrl.keydown({keyCode: 27}); // Escape closes dropdown.
-               mdCtrl.selectedItem = {value: mdScope.searchText}; // autocomplete watches this obj.
-            }
          }
       });
-
-
-      // IPhone: Captures blur event (triggered by 'Done'). Requires that submit be called
-      // explicitly - the watcher is not reacting to the value change per above.
-      mdInput.bind('blur', function(event){
-
-         if ( scope.ctrl.phone && mdScope.searchText && mdScope.searchText.length ){
-         
-            mdCtrl.keydown({keyCode: 27}); // Escape closes dropdown.
-            scope.ctrl.submit(mdScope.searchText);
-            scope.$apply();
-         }
-      })
    }
    
 
