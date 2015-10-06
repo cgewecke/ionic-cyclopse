@@ -36,21 +36,9 @@
             <span layout="column" flex layout-align="center center" > 
               <div layout="row" layout-fill layout-align="space-between">
 
-                <!-- Play (Phone) / Info (Tablet) --> 
+                <!-- Spacer (Phone) / Info (Tablet) --> 
                 <div layout="column" flex="25" layout-align="center">
-
                   <div layout="row" layout-align="start center">
-                    <div id="play-btn" 
-                        click="player.API.togglePlay()"
-                        class="mobile-play-button"
-                        hide-md>
-                      <ng-md-icon id="play-icon" icon="play_circle_outline" size="28" style="fill:white"
-                          ng-show="player.API.state === player.API.PAUSED" class="mobile-play-icon">
-                      </ng-md-icon>
-                      <ng-md-icon id="pause-icon" icon="pause" size="28" style="fill:white"
-                          ng-show="player.API.state === player.API.PLAYING" class="mobile-play-icon">
-                      </ng-md-icon>
-                    </div> 
                   </div>
                 </div>
 
